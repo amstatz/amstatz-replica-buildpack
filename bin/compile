@@ -68,10 +68,14 @@ if [ ! -d .maven ]; then
   echo " done"
 fi
 
-MAVEN_SETTINGS_URL="http://s3.amazonaws.com/heroku-jvm-langpack-java/settings.xml"
+MAVEN_SETTINGS_URL="https://raw.githubusercontent.com/amstatz/amstatz-replica-buildpack/master/opt/settings.xml"
 if [ -f .m2/settings.xml ]; then
   rm .m2/settings.xml 
 fi
+
+echo -n "MAVEN_SETTINGS_URL ["
+echo -n $MAVEN_SETTINGS_URL
+echo "]"
 
 if [ -f $BUILD_DIR/settings.xml ]; then
   echo -n "-----> Installing local settings.xml..."
@@ -87,6 +91,10 @@ fi
 cd $BUILD_DIR
 
 export MAVEN_OPTS="-Xmx704m -Xss1024k -XX:+UseCompressedOops -XX:MaxPermSize=256m"
+
+echo -n "MAVEN_OPTS ["
+echo -n $MAVEN_OPTS
+echo "]"
 
 # build app
 BUILDCMD="$CACHE_DIR/.maven/bin/mvn -U -B -Duser.home=$BUILD_DIR -Dmaven.repo.local=$CACHE_DIR/.m2/repository -s $CACHE_DIR/.m2/settings.xml -DskipTests=true clean install -Paws,replica"
