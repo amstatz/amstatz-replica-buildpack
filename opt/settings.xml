@@ -6,7 +6,7 @@
       <!--This sends everything else to /public -->
       <id>nexus</id>
       <mirrorOf>*</mirrorOf>
-      <url>http://ec2-23-22-78-69.compute-1.amazonaws.com:8081/nexus/content/groups/public/</url>
+      <url>http://maven.amstatz.com:8081/nexus/content/groups/public/</url>
     </mirror>
   </mirrors>
   <profiles>
