@@ -81,6 +81,16 @@ else
   echo -n "-----> Installing settings.xml..."
   curl -3 --max-time 10 --location $MAVEN_SETTINGS_URL --output .m2/settings.xml
   echo " done"
+  
+  echo "pwd"
+  pwd
+  
+  echo "cat .m2/settings.xml"
+  cat .m2/settings.xml
+  
+  echo "cat $CACHE_DIR/.m2/settings.xml"
+  cat $CACHE_DIR/.m2/settings.xml
+  
 fi
 
 # change to build dir to run maven
