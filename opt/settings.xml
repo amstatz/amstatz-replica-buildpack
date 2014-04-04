@@ -1,75 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <settings xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.org/xsd/settings-1.1.0.xsd" xmlns="http://maven.apache.org/SETTINGS/1.1.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <proxies>
-    <proxy>
-      <id>optional</id>
-      <active>true</active>
-      <protocol>http</protocol>
-      <username>maven</username>
-      <password>\{DESede\}QSUEpSZLRNo=</password>
-      <host>maven.amstatz.com</host>
-      <port>80</port>
-    </proxy>
-  </proxies>
-  <mirrors>
-    <mirror>
-      <mirrorOf>*</mirrorOf>
-      <name>remote-repos</name>
-      <url>http://maven.amstatz.com/artifactory/remote-repos</url>
-      <id>remote-repos</id>
-    </mirror>
-  </mirrors>
-  <servers>
-    <server>
-      <username>maven</username>
-      <password>\{DESede\}QSUEpSZLRNo=</password>
-      <id>central</id>
-    </server>
-    <server>
-      <username>maven</username>
-      <password>\{DESede\}QSUEpSZLRNo=</password>
-      <id>snapshots</id>
-    </server>
-  </servers>
-  <profiles>
-    <profile>
-      <repositories>
-        <repository>
-          <snapshots>
-            <enabled>false</enabled>
-          </snapshots>
-          <id>central</id>
-          <name>libs-release</name>
-          <url>http://maven.amstatz.com/artifactory/libs-release</url>
-        </repository>
-        <repository>
-          <snapshots />
-          <id>snapshots</id>
-          <name>libs-snapshot</name>
-          <url>http://maven.amstatz.com/artifactory/libs-snapshot</url>
-        </repository>
-      </repositories>
-      <pluginRepositories>
-        <pluginRepository>
-          <snapshots>
-            <enabled>false</enabled>
-          </snapshots>
-          <id>central</id>
-          <name>plugins-release</name>
-          <url>http://maven.amstatz.com/artifactory/plugins-release</url>
-        </pluginRepository>
-        <pluginRepository>
-          <snapshots />
-          <id>snapshots</id>
-          <name>plugins-snapshot</name>
-          <url>http://maven.amstatz.com/artifactory/plugins-snapshot</url>
-        </pluginRepository>
-      </pluginRepositories>
-      <id>artifactory</id>
-    </profile>
-  </profiles>
-  <activeProfiles>
-    <activeProfile>artifactory</activeProfile>
-  </activeProfiles>
+    <mirrors>
+        <mirror>
+            <!--This sends everything else to /public -->
+            <id>nexus</id>
+            <mirrorOf>*</mirrorOf>
+            <url>http://ec2-23-22-78-69.compute-1.amazonaws.com:8081/nexus/content/groups/public/</url>
+        </mirror>
+    </mirrors>
+    <profiles>
+        <profile>
+            <id>nexus</id>
+            <!--Enable snapshots for the built in central repo to direct -->
+            <!--all requests to nexus via the mirror -->
+            <repositories>
+                <repository>
+                    <id>central</id>
+                    <url>http://central</url>
+                    <releases><enabled>true</enabled></releases>
+                    <snapshots><enabled>true</enabled></snapshots>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>central</id>
+                    <url>http://central</url>
+                    <releases><enabled>true</enabled></releases>
+                    <snapshots><enabled>true</enabled></snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+    </profiles>
+    <activeProfiles>
+        <!--make the profile active all the time -->
+        <activeProfile>nexus</activeProfile>
+    </activeProfiles>
 </settings>
