@@ -41,6 +41,20 @@ if [ "true" == $KEEP_M2_CACHE ]; then
   logger -p user.notice -t "slugc[$$]" "language_pack_java retain_m2_repo"
 fi
 
+mkdir -p $BUILD_DIR/.startup
+cat << EOF > $BUILD_DIR/.startup/java_with_jstack
+  javacmd="java \$@"
+  eval "\$javacmd &"
+  pid=\$!
+
+  while :
+  do
+    sleep 180
+    kill -3 \$pid
+  done
+EOF
+chmod +x $BUILD_DIR/.startup/java_with_jstack
+
 #create the cache dir if it doesn't exist
 mkdir -p $CACHE_DIR
 
