@@ -148,17 +148,14 @@ cd $BUILD_DIR
 
 export MAVEN_OPTS="-Xmx1024m"
 
-echo "ENVIRONMENT ${ENVIRONMENT} before"
-
 if [ -e ${ENV_DIR}/ENVIRONMENT ]; then
   export "ENVIRONMENT=$(cat ${ENV_DIR}/ENVIRONMENT)"
-  echo "ENVIRONMENT setting!"
 fi
 
-echo "ENVIRONMENT ${ENVIRONMENT} after"
+echo "ENVIRONMENT ${ENVIRONMENT} building now!"
 
 # build app
-BUILDCMD="$CACHE_DIR/.maven/bin/mvn -B -Duser.home=$BUILD_DIR -Dmaven.repo.local=$CACHE_DIR/.m2/repository $MAVEN_SETTINGS_OPT -DskipTests=true clean install -Paws,replica"
+BUILDCMD="$CACHE_DIR/.maven/bin/mvn -B -Duser.home=$BUILD_DIR -Dmaven.repo.local=$CACHE_DIR/.m2/repository $MAVEN_SETTINGS_OPT -DskipTests=true clean install -Paws,$ENVIRONMENT"
 echo "-----> executing $BUILDCMD"
 
 $BUILDCMD 2>&1 | sed -u 's/^/       /'
