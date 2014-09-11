@@ -10,6 +10,7 @@ BIN_DIR=$(cd $(dirname $0); pwd) # absolute path
 # parse args
 BUILD_DIR=$1
 CACHE_DIR=$2
+ENV_DIR=$3
 LOGGER_FLAGS=""
 
 bp_dir=$(cd $(dirname $0); cd ..; pwd)
@@ -121,6 +122,12 @@ fi
 if [ -f .m2/settings.xml ]; then
   rm .m2/settings.xml 
 fi
+
+if [ -e ${ENV_DIR}/MAVEN_SETTINGS_URL ]; then
+  export "MAVEN_SETTINGS_URL=$(cat ${ENV_DIR}/MAVEN_SETTINGS_URL)"
+fi
+
+echo -n "set MAVEN_SETTINGS_URL to ${MAVEN_SETTINGS_URL}"
 
 if [ -n "$MAVEN_SETTINGS_PATH" ]; then
   MAVEN_SETTINGS_OPT="-s $MAVEN_SETTINGS_PATH"
