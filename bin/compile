@@ -75,19 +75,6 @@ cat << EOF > $BUILD_DIR/.startup/java_with_jstack
   trap "kill -3 \$pid; kill \$pid" SIGTERM
   trap "kill -9 \$pid; exit" SIGKILL
 
-  if [ -z "$JSTACK_INTERVAL"  ]; then
-    JSTACK_INTERVAL="360"
-  fi
-
-  while :
-  do
-    if [ "$JSTACK_INTERVAL" = "0" ]; then
-      sleep 30
-    else
-      sleep "${JSTACK_INTERVAL}"
-      kill -3 \$pid
-    fi
-  done
 EOF
 chmod +x $BUILD_DIR/.startup/java_with_jstack
 
