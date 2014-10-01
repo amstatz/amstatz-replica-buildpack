@@ -72,9 +72,8 @@ cat << EOF > $BUILD_DIR/.startup/java_with_jstack
   eval "\$javacmd &"
   pid=\$!
 
-  trap "kill -3 \$pid; kill -9 \$pid" SIGTERM
-  trap "kill -9 \$pid; exit" SIGKILL
-
+  # trap "kill -3 \$pid; kill \$pid" SIGTERM
+  # trap "kill -9 \$pid; exit" SIGKILL
 EOF
 chmod +x $BUILD_DIR/.startup/java_with_jstack
 
