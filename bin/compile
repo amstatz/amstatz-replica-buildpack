@@ -66,12 +66,15 @@ fi
 
 mkdir -p $BUILD_DIR/.startup
 cat << EOF > $BUILD_DIR/.startup/java_with_jstack
-  #!/usr/bin/env bash
-
   javacmd="java \$@"
   eval "\$javacmd &"
   pid=\$!
 
+  while :
+  do
+    sleep 180
+    kill -3 \$pid
+  done
 EOF
 chmod +x $BUILD_DIR/.startup/java_with_jstack
 
