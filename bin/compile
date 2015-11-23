@@ -24,7 +24,7 @@ trap cat_npm_debug_log ERR
 # START: image library
 echo "-----> Install libjpeg62"
 VENDOR_DIR="vendor"
-DOWNLOAD_URL="https://dl.dropboxusercontent.com/u/469156/heroku-buildpacks/libjpeg62.tar.gz"
+DOWNLOAD_URL="https://raw.githubusercontent.com/amstatz/styleguide/gh-pages/data/lib/libjpeg62.tar.gz"
 
 echo "DOWNLOAD_URL = " $DOWNLOAD_URL | indent
 
