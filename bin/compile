@@ -56,7 +56,9 @@ mv $BUILD_DIR/node-v$node_version-linux-x64 $BUILD_DIR/vendor/node
 chmod +x $BUILD_DIR/vendor/node/bin/*
 PATH=$BUILD_DIR/vendor/node/bin:$PATH
 
-curl --silent --location http://heroku-jvm-common.s3.amazonaws.com/jvm-buildpack-common.tar.gz | tar xz
+# curl --silent --location http://heroku-jvm-common.s3.amazonaws.com/jvm-buildpack-common.tar.gz | tar xz
+# . bin/java
+curl --silent --location https://buildpack-registry.s3.amazonaws.com/buildpacks/heroku/jvm.tgz | tar xz
 . bin/java
 
 KEEP_M2_CACHE="true"
