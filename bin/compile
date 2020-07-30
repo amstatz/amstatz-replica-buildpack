@@ -46,7 +46,8 @@ node_version="0.10.31"
 
 # Download node from Heroku's S3 mirror of nodejs.org/dist
 status "Downloading and installing node"
-node_url="http://s3pository.heroku.com/node/v$node_version/node-v$node_version-linux-x64.tar.gz"
+# node_url="http://s3pository.heroku.com/node/v$node_version/node-v$node_version-linux-x64.tar.gz"
+node_url="https://nodejs.org/dist/v$node_version/node-v$node_version-linux-x64.tar.gz"
 curl $node_url -s -o - | tar xzf - -C $BUILD_DIR
 
 # Move node (and npm) into ./vendor and make them executable
